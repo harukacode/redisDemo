@@ -13,7 +13,7 @@ public class Main {
 
     public static void main(String[] args) throws InterruptedException {
         TestObject object = new TestObject();
-        Map<String, String> map = new TreeMap<>();
+        Map<String, String> map = new TreeMap<String, String>();
         map.put("a", "b");
         map.put("c", "d");
         map.put("e", "f");
@@ -29,11 +29,13 @@ public class Main {
         System.out.println(value.length);
         byte[] key = XSON.write("key");
 
-        Jedis jedis = new Jedis("47.88.1.246");
+        Jedis jedis = new Jedis("127.0.0.1");
         jedis.set(key, value);
 
-        Thread.sleep(1000);
+        Thread.sleep(10000);
         byte[] data = jedis.get(key);
+
+        System.out.println(key);
 
         TestObject t = XSON.parse(data);
         System.out.println(t);
